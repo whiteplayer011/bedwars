@@ -1,0 +1,2 @@
+# bedwars
+Projeto MineGen AI
