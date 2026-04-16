@@ -1,2 +1,3 @@
 # bedwars
-Projeto MineGen AI
+
+Gerado por MineGen AI
