@@ -1,48 +1,32 @@
 name: Build & Release
-
 on:
   push:
     branches: [ "main", "master" ]
   workflow_dispatch:
-
 permissions:
-  contents: write # CRÍTICO: Permite criar Releases e Tags
-
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Configurar JDK 17
+    - name: Set up JDK 8 (Runtime)
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '8'
         distribution: 'temurin'
-    
-        
-    - name: Configurar Gradle
+    - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
-
-    - name: Permissão de Execução Gradlew
+    - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-
-    - name: Compilar com Gradle
+    - name: Build with Gradle
       run: ./gradlew build
-
-    - name: Listar Arquivos (Debug)
-      run: ls -R build/libs/
-
-    - name: Criar Release Automática
+    - name: Release Artifacts
       uses: softprops/action-gh-release@v1
       if: success()
       with:
         tag_name: v1.0.${{ github.run_number }}
         name: Versão 1.0.${{ github.run_number }}
-        body: |
-          Build automático gerado pelo MineGen AI.
-          Commit: ${{ github.sha }}
         files: build/libs/*.jar
         draft: false
         prerelease: false
