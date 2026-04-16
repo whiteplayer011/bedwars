@@ -1,0 +1,9 @@
+name: MeuPlugin
+main: com.exemplo.meuplugin.Main
+version: 1.0
+api-version: 1.8
+author: SeuNome
+commands:
+  bedwars:
+    description: Comando principal do plugin BedWars.
+    usage: /<command>
